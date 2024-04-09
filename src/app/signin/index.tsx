@@ -3,14 +3,30 @@ import {
   Image,
   Text,
   StyleSheet,
-  TouchableOpacity,
   KeyboardAvoidingView,
   Pressable,
   TextInput,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
+import { auth } from 'src/app/firebaseConfig.js';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function index() {
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  function handleLogin() {
+    signInWithEmailAndPassword(auth, userEmail, userPassword)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error);
+      });
+  }
+
   return (
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.containerLogo}>
@@ -24,17 +40,19 @@ export default function index() {
           keyboardType="email-address"
           autoCapitalize="none"
           autoComplete="email"
-          onChangeText={() => {}}
+          onChangeText={setUserEmail}
+          value={userEmail}
         />
         <TextInput
           style={styles.input}
           placeholder="Senha"
           autoCorrect={false}
           secureTextEntry
-          onChangeText={() => {}}
+          value={userPassword}
+          onChangeText={setUserPassword}
         />
         <Text style={styles.errText}>Email ou Senha não conferem!</Text>
-        <Pressable style={styles.btnSubmit}>
+        <Pressable style={styles.btnSubmit} onPress={handleLogin}>
           <Text style={styles.textSubmit}>Acessar</Text>
         </Pressable>
         <View style={styles.subButton}>

@@ -5,3 +5,4 @@
 5. Add Add a .prettierrc e .prettierignore: node --eval "fs.writeFileSync('.husky/pre-commit','npx lint-staged\n')"
 6. Install Expo Router
 7. GitHub
+8. Install FireBase: npx expo install firebase
