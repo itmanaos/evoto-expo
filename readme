@@ -1,0 +1,7 @@
+1. Criar Projeto com Expo TypeScript
+2. Criar Estrutura de Pasta /src /src/app
+3. Install ESLint e Configurar Esling: npx eslint --init
+4. Install Prettier npm install --save-dev prettier; npm install --save-dev eslint-config-prettier;
+5. Add Add a .prettierrc e .prettierignore: node --eval "fs.writeFileSync('.husky/pre-commit','npx lint-staged\n')"
+6. Install Expo Router
+7. GitHub
