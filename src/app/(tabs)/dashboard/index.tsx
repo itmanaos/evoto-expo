@@ -1,10 +1,10 @@
-import { View, Text } from 'react-native';
+import { View, KeyboardAvoidingView, Image } from 'react-native';
 import React from 'react';
 
 export default function index() {
   return (
-    <View>
-      <Text>Pagina Painel</Text>
-    </View>
+    <KeyboardAvoidingView>
+      <View></View>
+    </KeyboardAvoidingView>
   );
 }
