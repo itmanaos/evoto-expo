@@ -8,17 +8,37 @@ import {
   TextInput,
 } from 'react-native';
 import React, { useState } from 'react';
-import { auth } from 'src/app/firebaseConfig.js';
+import { auth } from 'firebaseConfig.js';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { router } from 'expo-router';
+import EVotoLogo from '@/components/EVotoLogo';
+import WFCLogo from '@/components/WFCLogo';
 
-export default function index() {
+export default function Signin() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const currentUser = auth.currentUser;
+
+  if (currentUser != null) {
+    router.replace('/dashboard');
+  }
+
   function handleLogin() {
+    if (userEmail === '' || userPassword === '') {
+      alert('Preencha todos os dados!');
+    } else {
+      login();
+    }
+  }
+
+  function login() {
     signInWithEmailAndPassword(auth, userEmail, userPassword)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        if (user) {
+          console.log('Usuário logado');
+          router.replace('/dashboard');
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -27,11 +47,17 @@ export default function index() {
       });
   }
 
+  function replacePass() {
+    router.push('/newpass');
+  }
+
+  function addUser() {
+    router.push('/newuser');
+  }
+
   return (
     <KeyboardAvoidingView style={styles.background}>
-      <View style={styles.containerLogo}>
-        <Image source={require('src/assets/evoto.png')} />
-      </View>
+      <EVotoLogo />
       <View style={styles.container}>
         <TextInput
           style={styles.input}
@@ -56,17 +82,15 @@ export default function index() {
           <Text style={styles.textSubmit}>Acessar</Text>
         </Pressable>
         <View style={styles.subButton}>
-          <Pressable>
+          <Pressable onPress={addUser}>
             <Text style={styles.textSubButton}>Novo Usuario</Text>
           </Pressable>
-          <Pressable>
+          <Pressable onPress={replacePass}>
             <Text style={styles.textSubButton}>Esqueceu a senha?</Text>
           </Pressable>
         </View>
       </View>
-      <View style={styles.containerWfclogo}>
-        <Image source={require('src/assets/wfclogo.png')} />
-      </View>
+      <WFCLogo />
     </KeyboardAvoidingView>
   );
 }
@@ -76,11 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F0f0f0',
-  },
-  containerLogo: {
-    flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#e1e1e1',
   },
   input: {
     backgroundColor: '#FFF',

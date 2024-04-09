@@ -17,9 +17,12 @@ export default function Layout() {
       <Stack.Screen name="ocorrencias/index" options={{ title: 'Ocorrencias' }} />
       <Stack.Screen name="pesquisa/index" options={{ title: 'Pesquisa' }} />
       <Stack.Screen name="urnas/index" options={{ title: 'Urnas' }} />
-      <Stack.Screen name="signin/index" options={{ title: 'Login', headerShown: false }} />
+      {/* {      <Stack.Screen name="signin/index" options={{ title: 'Login', headerShown: false }} />
+      <Stack.Screen name="signin/newuser" options={{ title: 'Novo Usuario' }} />
+      <Stack.Screen name="signin/redefinepass" options={{ title: 'Redefinir Senha' }} />} */}
 
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="(login)" options={{ headerShown: false }} />
     </Stack>
   );
 }

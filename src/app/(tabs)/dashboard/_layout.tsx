@@ -8,12 +8,12 @@ export default function Layout() {
         name="index"
         options={{
           headerShown: false,
-          title: 'Painel',
+          title: 'Home',
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
-              return <FontAwesome name="tags" color={color} size={size} />;
+              return <FontAwesome name="home" color={color} size={size} />;
             }
-            return <FontAwesome name="tag" color={color} size={size / 1.5} />;
+            return <FontAwesome name="home" color={color} size={size / 1.5} />;
           },
         }}
       />
@@ -24,9 +24,9 @@ export default function Layout() {
           title: 'Painel',
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
-              return <FontAwesome name="tags" color={color} size={size} />;
+              return <FontAwesome name="user" color={color} size={size} />;
             }
-            return <FontAwesome name="tag" color={color} size={size / 1.5} />;
+            return <FontAwesome name="user" color={color} size={size / 1.5} />;
           },
         }}
       />
