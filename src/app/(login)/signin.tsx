@@ -13,6 +13,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { router } from 'expo-router';
 import EVotoLogo from '@/components/EVotoLogo';
 import WFCLogo from '@/components/WFCLogo';
+import { Button } from '@/components/Button';
+import { Input } from '@/components/Input';
 
 export default function Signin() {
   const [userEmail, setUserEmail] = useState('');
@@ -59,8 +61,7 @@ export default function Signin() {
     <KeyboardAvoidingView style={styles.background}>
       <EVotoLogo />
       <View style={styles.container}>
-        <TextInput
-          style={styles.input}
+        <Input
           placeholder="Informe o Email"
           autoCorrect={false}
           keyboardType="email-address"
@@ -69,8 +70,8 @@ export default function Signin() {
           onChangeText={setUserEmail}
           value={userEmail}
         />
-        <TextInput
-          style={styles.input}
+
+        <Input
           placeholder="Senha"
           autoCorrect={false}
           secureTextEntry
@@ -78,9 +79,9 @@ export default function Signin() {
           onChangeText={setUserPassword}
         />
         <Text style={styles.errText}>Email ou Senha não conferem!</Text>
-        <Pressable style={styles.btnSubmit} onPress={handleLogin}>
-          <Text style={styles.textSubmit}>Acessar</Text>
-        </Pressable>
+
+        <Button title="Acessar" color="#2FDBBC" onPress={handleLogin} />
+
         <View style={styles.subButton}>
           <Pressable onPress={addUser}>
             <Text style={styles.textSubButton}>Novo Usuario</Text>
@@ -90,6 +91,7 @@ export default function Signin() {
           </Pressable>
         </View>
       </View>
+
       <WFCLogo />
     </KeyboardAvoidingView>
   );

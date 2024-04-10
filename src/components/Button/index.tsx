@@ -1,12 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { Pressable, PressableProps, Text } from 'react-native';
 
-export default function Button() {
+import { styles } from './styles';
+
+type Props = PressableProps & {
+  title: string;
+  //   onPress: () => void;
+  color: string;
+};
+
+export function Button({ title, color, ...rest }: Props) {
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+    <Pressable style={[styles.container, { backgroundColor: color }]} {...rest}>
+      <Text style={styles.title}>{title}</Text>
+    </Pressable>
   );
 }
-
-const styles = StyleSheet.create({});

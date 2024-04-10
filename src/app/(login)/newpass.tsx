@@ -4,6 +4,8 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from 'firebaseConfig';
 import { router } from 'expo-router';
 import EVotoLogo from '@/components/EVotoLogo';
+import { Input } from '@/components/Input';
+import { Button } from '@/components/Button';
 
 export default function Newpass() {
   const [userEmail, setUserEmail] = useState('');
@@ -33,8 +35,7 @@ export default function Newpass() {
     <KeyboardAvoidingView style={styles.background}>
       <EVotoLogo />
       <View style={styles.container}>
-        <TextInput
-          style={styles.input}
+        <Input
           placeholder="Informe o Email"
           autoCorrect={false}
           keyboardType="email-address"
@@ -43,19 +44,15 @@ export default function Newpass() {
           onChangeText={setUserEmail}
           value={userEmail}
         />
-        <Text style={styles.errText}>Email ou Senha não conferem!</Text>
         <View style={styles.btnContainer}>
-          <Pressable style={styles.btnSubmit} onPress={handleSubmit}>
-            <Text style={styles.textBtn}>Redefinir Senha</Text>
-          </Pressable>
-          <Pressable
-            style={styles.btnCancel}
+          <Button title="Redefinir" color="#2FDBBC" onPress={handleSubmit} />
+          <Button
+            title="Cancelar"
+            color="#db2f32"
             onPress={() => {
               router.back();
             }}
-          >
-            <Text style={styles.textBtn}>Cancelar</Text>
-          </Pressable>
+          />
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -73,52 +70,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  input: {
-    backgroundColor: '#FFF',
-    width: '90%',
-    marginBottom: 15,
-    color: '#222',
-    fontSize: 17,
-    borderRadius: 6,
-    padding: 10,
-  },
   container: {
     justifyContent: 'center',
     alignItems: 'center',
     width: '90%',
     marginBottom: 50,
   },
-  btnSubmit: {
-    backgroundColor: '#2FDBBC',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-    borderRadius: 6,
-  },
-  textBtn: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFF',
-  },
-  btnCancel: {
-    backgroundColor: '#ff0000',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-    borderRadius: 6,
-  },
   btnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '90%',
-    gap: 10,
-  },
-  errText: {
-    color: 'red',
-    fontSize: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
-    display: 'none',
+    width: '100%',
   },
 });
