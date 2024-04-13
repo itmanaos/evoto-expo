@@ -1,10 +1,10 @@
-import { View, Text } from 'react-native';
+import { Text, SafeAreaView } from 'react-native';
 import React from 'react';
 
 export default function Eleitores() {
   return (
-    <View>
+    <SafeAreaView>
       <Text>eleitoreE</Text>
-    </View>
+    </SafeAreaView>
   );
 }

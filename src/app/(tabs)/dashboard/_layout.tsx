@@ -5,15 +5,15 @@ export default function Layout() {
   return (
     <Tabs>
       <Tabs.Screen
-        name="index"
+        name="denuncias"
         options={{
-          headerShown: false,
-          title: 'Home',
+          headerShown: true,
+          title: 'Denuncias',
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
-              return <FontAwesome name="home" color={color} size={size} />;
+              return <FontAwesome name="free-code-camp" color={color} size={size} />;
             }
-            return <FontAwesome name="home" color={color} size={size / 1.5} />;
+            return <FontAwesome name="free-code-camp" color={color} size={size / 1.5} />;
           },
         }}
       />
@@ -24,22 +24,22 @@ export default function Layout() {
           title: 'Eleitores',
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
-              return <FontAwesome name="user" color={color} size={size} />;
+              return <FontAwesome name="address-book" color={color} size={size} />;
             }
-            return <FontAwesome name="user" color={color} size={size / 1.5} />;
+            return <FontAwesome name="address-book" color={color} size={size / 1.5} />;
           },
         }}
       />
       <Tabs.Screen
-        name="denuncias"
+        name="index"
         options={{
           headerShown: false,
-          title: 'Denuncias',
+          title: 'Home',
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
-              return <FontAwesome name="home" color={color} size={size} />;
+              return <FontAwesome name="home" color={color} size={size * 1.3} />;
             }
-            return <FontAwesome name="home" color={color} size={size / 1.5} />;
+            return <FontAwesome name="home" color={color} size={size} />;
           },
         }}
       />
@@ -50,9 +50,9 @@ export default function Layout() {
           title: 'Pesquisas',
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
-              return <FontAwesome name="home" color={color} size={size} />;
+              return <FontAwesome name="clipboard" color={color} size={size} />;
             }
-            return <FontAwesome name="home" color={color} size={size / 1.5} />;
+            return <FontAwesome name="clipboard" color={color} size={size / 1.5} />;
           },
         }}
       />
@@ -63,9 +63,9 @@ export default function Layout() {
           title: 'Equipe',
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
-              return <FontAwesome name="home" color={color} size={size} />;
+              return <FontAwesome name="users" color={color} size={size} />;
             }
-            return <FontAwesome name="home" color={color} size={size / 1.5} />;
+            return <FontAwesome name="users" color={color} size={size / 1.5} />;
           },
         }}
       />

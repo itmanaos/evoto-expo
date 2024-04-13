@@ -11,11 +11,7 @@ export default function Layout() {
         headerTitleStyle: { fontWeight: 'bold' },
       }}
     >
-      <Stack.Screen name="index" options={{ title: 'Bem Vindo', headerShown: false }} />
-
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="(login)" options={{ headerShown: false }} />
-      <Stack.Screen name="(screens)" options={{ headerShown: false }} />
+      <Stack.Screen name="index" options={{ title: 'Main' }} />
     </Stack>
   );
 }

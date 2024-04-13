@@ -2,6 +2,7 @@ import { View, Text, KeyboardAvoidingView, Image, StyleSheet, Pressable } from '
 import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
 import { Link, router } from 'expo-router';
+import { Button } from '@/components/Button';
 
 export default function index() {
   function handleSubmit() {
@@ -18,12 +19,7 @@ export default function index() {
           <Text style={{ fontSize: 28, color: '#2FDBBC', fontWeight: 'bold' }}>Bem Vindo ao</Text>
           <Text style={{ fontSize: 28 }}>Sistema de Campanhas</Text>
         </View>
-        <Link href="/signin" asChild>
-          <Pressable style={styles.btnSubmit} onPress={handleSubmit}>
-            <Text style={styles.textSubmit}>Acessar</Text>
-            <MaterialIcons name="login" size={24} color="white" />
-          </Pressable>
-        </Link>
+        <Button title="Acessar" color="#2FDBBC" onPress={handleSubmit} />
       </View>
       <View style={styles.containerWfclogo}>
         <Image source={require('src/assets/wfclogo.png')} />

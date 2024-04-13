@@ -1,12 +1,4 @@
-import {
-  View,
-  Image,
-  Text,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Pressable,
-  TextInput,
-} from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import { auth } from 'firebaseConfig.js';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -19,6 +11,8 @@ import { Input } from '@/components/Input';
 export default function Signin() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [showAppOptions, setShowAppOptions] = useState(false);
+
   const currentUser = auth.currentUser;
 
   if (currentUser != null) {
