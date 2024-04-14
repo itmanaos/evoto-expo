@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   background: {
@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#F0f0f0',
+    marginTop: StatusBar.currentHeight || 0,
   },
   container: {
     flex: 1,
@@ -30,7 +31,6 @@ export const styles = StyleSheet.create({
   textLink: {
     fontSize: 16,
     color: '#000',
-    marginTop: 20,
   },
   btnSubmit: {
     backgroundColor: '#2FDBBC',

@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { View, StyleSheet, FlatList, SafeAreaView, StatusBar } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import React, { useState } from 'react';
 import { categorias } from '@/database/modals/categorias';
@@ -25,6 +25,7 @@ export default function Denuncias() {
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
+  //console.log('denuncias.28 - ' + categorias.length);
 
   return (
     <>
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#e1e1e1',
+    marginTop: StatusBar.currentHeight || 0,
   },
   map: {
     flex: 5,

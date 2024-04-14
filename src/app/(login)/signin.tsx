@@ -15,7 +15,6 @@ export default function Signin() {
 
   if (currentUser != null) {
     return <Redirect href="/dashboard" />;
-  } else {
   }
 
   function handleLogin() {
@@ -31,8 +30,9 @@ export default function Signin() {
       .then((userCredential) => {
         const user = userCredential.user;
         if (user) {
-          console.log('Usuário logado');
+          console.log('signin.35' + 'Usuário logado');
           router.replace('/dashboard');
+          //<Redirect href="/dashboard" />;
         }
       })
       .catch((error) => {

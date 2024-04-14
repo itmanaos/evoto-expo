@@ -1,4 +1,4 @@
-import { View, Text, Modal, Pressable, Alert } from 'react-native';
+import { View, Text, Modal, Pressable, Alert, FlatList } from 'react-native';
 import React, { Children, PropsWithChildren } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -40,25 +40,35 @@ export function ModalCategorias({
             <Text style={styles.headerTitle}>{headerTitle}</Text>
           </View>
           <View style={styles.content}>
-            {listTipoCategories.map((item, k) => (
-              <SelectCategoria
-                categ={item}
-                itemKey={item.key}
-                onPress={() => {
-                  onRequestClose();
-                }}
-                styleSelect={[styles.categoryItem]}
-                categoryItemStyle={[
-                  {
-                    height: 100,
-                    backgroundColor: '#FFF',
-                    width: 105,
-                    padding: 4,
-                    borderRadius: 10,
-                  },
-                ]}
-              />
-            ))}
+            <FlatList
+              data={listTipoCategories}
+              numColumns={3}
+              horizontal={false}
+              keyExtractor={(item) => item.key}
+              renderItem={({ item }) => (
+                <SelectCategoria
+                  categ={item}
+                  itemKey={item.key}
+                  onPress={() => {
+                    onRequestClose();
+                  }}
+                  styleSelect={[styles.categoryItem]}
+                  categoryItemStyle={[
+                    {
+                      height: 100,
+                      backgroundColor: '#FFF',
+                      width: 105,
+                      padding: 4,
+                      borderRadius: 10,
+                    },
+                  ]}
+                />
+              )}
+              ItemSeparatorComponent={() => <View style={{ height: 2 }} />}
+              columnWrapperStyle={{
+                justifyContent: 'center',
+              }}
+            />
           </View>
           <View>
             <Pressable

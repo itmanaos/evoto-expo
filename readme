@@ -7,5 +7,4 @@
 7. GitHub
 8. Install FireBase: npx expo install firebase
 9. Adicionou Asinc storage para rodar com o firebase: npx expo install @react-native-async-storage/async-storage
-10. Instalar MapVie
-7
+10. Instalar MapView

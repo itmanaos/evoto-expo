@@ -1,4 +1,4 @@
-import { View, KeyboardAvoidingView, Text, Pressable } from 'react-native';
+import { View, KeyboardAvoidingView, Text, Pressable, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 import { Link, Redirect, router } from 'expo-router';
 import { getAuth, signOut } from 'firebase/auth';
@@ -24,7 +24,7 @@ export default function Dashboard() {
   }
 
   return (
-    <KeyboardAvoidingView>
+    <SafeAreaView style={styles.background}>
       <View>
         <Pressable onPress={logout}>
           <Text style={styles.textLink}>Logout</Text>
@@ -51,6 +51,6 @@ export default function Dashboard() {
           Urnas
         </Link>
       </View>
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }

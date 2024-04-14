@@ -59,9 +59,10 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   content: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    flex: 1,
+    //flexDirection: 'row',
+    //flexWrap: 'wrap',
+    //justifyContent: 'center',
     alignItems: 'center',
   },
   categoryItem: {
