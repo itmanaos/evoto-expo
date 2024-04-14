@@ -1,11 +1,12 @@
 import { View, Text, KeyboardAvoidingView, Image, StyleSheet } from 'react-native';
 import React from 'react';
-import { router } from 'expo-router';
 import { Button } from '@/components/Button';
+import { router } from 'expo-router';
 
 export default function index() {
   function handleSubmit() {
-    return router.replace('/signin');
+    router.replace('/login');
+    return;
   }
 
   return (
