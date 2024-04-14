@@ -4,6 +4,7 @@ import { ICategory } from '@/database/interfaces/ITipoOcorrencias';
 
 interface SelectCategoriaPropos {
   categ: ICategory;
+  itemKey: string;
   onPress: () => void;
   styleSelect: StyleProp<ViewStyle>;
   categoryItemStyle: StyleProp<ViewStyle>;
@@ -11,6 +12,7 @@ interface SelectCategoriaPropos {
 
 export function SelectCategoria({
   categ,
+  itemKey,
   onPress,
   styleSelect,
   categoryItemStyle,

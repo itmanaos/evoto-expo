@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-export default function Main() {
+export default function Detalhe() {
   return (
     <View>
-      <Text>Atividades</Text>
+      <Text>detalhD</Text>
     </View>
   );
 }

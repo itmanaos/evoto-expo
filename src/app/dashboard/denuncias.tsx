@@ -1,9 +1,9 @@
 import { View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { categorias } from '@/database/modals/categorias';
 import { tipoOcorrencias } from '@/database/modals/tipoOcorrencias';
-import { ICategory, ITipoOcorrencia } from '@/database/interfaces/ITipoOcorrencias';
+import { ICategory } from '@/database/interfaces/ITipoOcorrencias';
 import { SelectCategoria } from '@/components/SelectCategoria';
 import { ModalCategorias } from '@/components/ModalCategorias';
 
@@ -19,16 +19,8 @@ export interface IMarker {
 
 export default function Denuncias() {
   const [markers, setMarkers] = useState<IMarker[]>([]);
-  const [categoriaList, setCategoriaList] = useState<ICategory[]>([]);
-  const [tipoOcorrenciaList, setTipoOcorrenciaList] = useState<ITipoOcorrencia[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<ICategory>(categorias[0]);
-  const [filter, setFilter] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-
-  useEffect(() => {
-    setCategoriaList(categorias);
-    setTipoOcorrenciaList(tipoOcorrencias);
-  }, []);
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
@@ -55,13 +47,16 @@ export default function Denuncias() {
         </MapView>
         <View style={styles.categoryContainer}>
           <FlatList
-            data={categoriaList}
+            data={categorias}
             keyExtractor={(item) => item.key}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ alignItems: 'center' }}
+            contentContainerStyle={{
+              alignItems: 'center',
+            }}
             renderItem={({ item }) => (
               <SelectCategoria
+                itemKey={item.key}
                 categ={item}
                 onPress={() => {
                   setSelectedCategory(item);

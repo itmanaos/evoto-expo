@@ -43,6 +43,7 @@ export function ModalCategorias({
             {listTipoCategories.map((item, k) => (
               <SelectCategoria
                 categ={item}
+                itemKey={item.key}
                 onPress={() => {
                   onRequestClose();
                 }}

@@ -1,7 +1,6 @@
-import { View, Text, KeyboardAvoidingView, Image, StyleSheet, Pressable } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { View, Text, KeyboardAvoidingView, Image, StyleSheet } from 'react-native';
 import React from 'react';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import { Button } from '@/components/Button';
 
 export default function index() {

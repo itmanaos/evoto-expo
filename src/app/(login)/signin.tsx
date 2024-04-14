@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet, KeyboardAvoidingView, Pressable } from 'react-native';
-import React, { useState } from 'react';
-import { auth } from 'firebaseConfig.js';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { router } from 'expo-router';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Pressable, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { Redirect, router } from 'expo-router';
 import EVotoLogo from '@/components/EVotoLogo';
 import WFCLogo from '@/components/WFCLogo';
 import { Button } from '@/components/Button';
@@ -11,12 +10,12 @@ import { Input } from '@/components/Input';
 export default function Signin() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [showAppOptions, setShowAppOptions] = useState(false);
-
+  const auth = getAuth();
   const currentUser = auth.currentUser;
 
   if (currentUser != null) {
-    router.replace('/dashboard');
+    return <Redirect href="/dashboard" />;
+  } else {
   }
 
   function handleLogin() {

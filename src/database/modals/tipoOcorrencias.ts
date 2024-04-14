@@ -33,6 +33,7 @@ export const tipoOcorrencias = [
     label: 'Perda de Documento',
     icon: require('src/assets/sec-doc-lost.png'),
   },
+  { categ: 'sec', key: 'sec010', label: 'Arma', icon: require('src/assets/sec_arma.png') },
 
   {
     categ: 'trn',

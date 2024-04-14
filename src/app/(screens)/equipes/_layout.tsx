@@ -12,6 +12,7 @@ export default function Layout() {
       }}
     >
       <Stack.Screen name="index" options={{ title: 'Main' }} />
+      <Stack.Screen name="agenda" options={{ title: 'Agenda' }} />
     </Stack>
   );
 }
