@@ -5,7 +5,7 @@ import { Button } from '@/components/Button';
 
 export default function index() {
   function handleSubmit() {
-    router.replace('/signin');
+    return router.replace('/signin');
   }
 
   return (
