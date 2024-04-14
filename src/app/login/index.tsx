@@ -11,11 +11,11 @@ export default function Signin() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const auth = getAuth();
-  const currentUser = auth.currentUser;
+  //const currentUser = auth.currentUser;
 
-  if (currentUser != null) {
-    return <Redirect href="/dashboard" />;
-  }
+  // if (currentUser != null) {
+  //   return <Redirect href="/dashboard" />;
+  // }
 
   function handleLogin() {
     if (userEmail === '' || userPassword === '') {
