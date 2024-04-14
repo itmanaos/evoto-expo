@@ -38,4 +38,9 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
   },
+  status: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
 });

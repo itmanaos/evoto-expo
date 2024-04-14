@@ -12,6 +12,7 @@ export default function index({ pesq, onPress, ...rest }: Props) {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container} key={pesq.key}>
       <View style={styles.container}>
+        <Text style={styles.status}>STATUS: {pesq.situacao ? <Text>data</Text> : null}</Text>
         <Text style={styles.header}>CODIGO: {pesq.key}</Text>
         <Text style={styles.textContent}>REGISTRO: {pesq.reg}</Text>
         <Text style={styles.textTitulo}>NOME: {pesq.nome}</Text>
@@ -19,7 +20,6 @@ export default function index({ pesq, onPress, ...rest }: Props) {
 
         <View style={styles.qtdeline}>
           <Text style={styles.textContent}>Tipo: {pesq.tipo}</Text>
-          <Text style={styles.textContent}>STATUS: {pesq.situacao}</Text>
         </View>
 
         <View>

@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 
 export default function index() {
   function handleSubmit() {
-    router.replace('/login');
+    router.replace('/signin');
     return;
   }
 

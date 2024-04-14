@@ -10,7 +10,7 @@ import { Input } from '@/components/Input';
 export default function Signin() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const auth = getAuth();
+  //const auth = getAuth();
   //const currentUser = auth.currentUser;
 
   // if (currentUser != null) {
@@ -26,20 +26,21 @@ export default function Signin() {
   }
 
   function login() {
-    signInWithEmailAndPassword(auth, userEmail, userPassword)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        if (user) {
-          console.log('signin.35' + 'Usuário logado');
-          router.replace('/dashboard');
-          //<Redirect href="/dashboard" />;
-        }
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error);
-      });
+    // signInWithEmailAndPassword(auth, userEmail, userPassword)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     if (user) {
+    //       console.log('signin.35' + 'Usuário logado');
+    //       router.replace('/dashboard');
+    //       //<Redirect href="/dashboard" />;
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     console.log(error);
+    //   });
+    router.replace('/dashboard');
   }
 
   function replacePass() {
