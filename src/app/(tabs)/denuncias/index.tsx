@@ -6,6 +6,7 @@ import { tipoOcorrencias } from '@/database/modals/tipoOcorrencias';
 import { ICategory } from '@/database/interfaces/ITipoOcorrencias';
 import { SelectCategoria } from '@/components/SelectCategoria';
 import { ModalCategorias } from '@/components/ModalCategorias';
+import { router } from 'expo-router';
 
 export interface IMarker {
   category: string;
@@ -60,8 +61,9 @@ export default function Denuncias() {
                 itemKey={item.key}
                 categ={item}
                 onPress={() => {
-                  setSelectedCategory(item);
-                  toggleModal();
+                  // setSelectedCategory(item);
+                  // toggleModal();
+                  router.push('/denuncias/select-subcateg');
                 }}
                 styleSelect={[styles.categoryItem]}
                 categoryItemStyle={[
@@ -77,13 +79,13 @@ export default function Denuncias() {
         </View>
       </SafeAreaView>
 
-      <ModalCategorias
+      {/* <ModalCategorias
         headerTitle="Selecione o Tipo de Ocorrência"
         categTitle={selectedCategory.label}
         onRequestClose={toggleModal}
         modalVisible={modalVisible}
         listTipoCategories={tipoOcorrencias.filter((tipo) => tipo.categ === selectedCategory?.key)}
-      />
+      /> */}
     </>
   );
 }
