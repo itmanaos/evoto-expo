@@ -31,7 +31,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="index"
+        name="main"
         options={{
           headerShown: false,
           title: 'Home',

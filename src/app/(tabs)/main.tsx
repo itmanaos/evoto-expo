@@ -1,32 +1,20 @@
-import { View, KeyboardAvoidingView, Text, Pressable, SafeAreaView } from 'react-native';
-import React, { useState } from 'react';
-import { Link, Redirect, router } from 'expo-router';
-import { getAuth, signOut } from 'firebase/auth';
+import { View, Text, Pressable, SafeAreaView } from 'react-native';
+import React, { useContext } from 'react';
+import { Link, Redirect } from 'expo-router';
 import { styles } from '@/styles/styles';
+import { AuthContext } from '@/context/ctx';
 
-export default function Dashboard() {
-  const auth = getAuth();
-  const currentUser = auth.currentUser;
+export default function Main() {
+  const { userName, signOut } = useContext(AuthContext);
 
-  if (currentUser == null) {
-    return <Redirect href="/Signin" />;
-  }
-
-  function logout() {
-    signOut(auth)
-      .then(() => {
-        router.push('/');
-      })
-      .catch((error) => {
-        const errorMessage = error.errorMessage;
-        console.log(errorMessage);
-      });
+  if (userName == null) {
+    return <Redirect href="/" />;
   }
 
   return (
     <SafeAreaView style={styles.background}>
       <View>
-        <Pressable onPress={logout}>
+        <Pressable onPress={() => signOut()}>
           <Text style={styles.textLink}>Logout</Text>
         </Pressable>
         <Link style={styles.textLink} href={'/atividades'}>

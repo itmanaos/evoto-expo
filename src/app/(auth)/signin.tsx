@@ -1,58 +1,56 @@
 import { View, Text, StyleSheet, KeyboardAvoidingView, Pressable, Alert } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { Redirect, router } from 'expo-router';
+import React, { useContext, useState, useEffect } from 'react';
+import { Redirect, Stack, router } from 'expo-router';
 import EVotoLogo from '@/components/EVotoLogo';
 import WFCLogo from '@/components/WFCLogo';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
+import { AuthContext } from '@/context/ctx';
 
 export default function Signin() {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  //const auth = getAuth();
-  //const currentUser = auth.currentUser;
+  const [errorMessageShow, setErrorMessageShow] = useState(false);
+  const [btnSend, setBtnSend] = useState(false);
 
-  // if (currentUser != null) {
-  //   return <Redirect href="/dashboard" />;
-  // }
+  const { userName, session, isLoading, signIn } = useContext(AuthContext);
+
+  if (session != null) {
+    return <Redirect href="(tabs)/main/" />;
+  }
+
+  useEffect(() => {
+    if (userEmail !== '' || userPassword !== '') {
+      setErrorMessageShow(false);
+    } else {
+      setBtnSend(true);
+    }
+  });
 
   function handleLogin() {
     if (userEmail === '' || userPassword === '') {
-      alert('Preencha todos os dados!');
+      setErrorMessageShow(true);
     } else {
-      login();
+      signIn(userEmail, userPassword);
     }
   }
 
-  function login() {
-    // signInWithEmailAndPassword(auth, userEmail, userPassword)
-    //   .then((userCredential) => {
-    //     const user = userCredential.user;
-    //     if (user) {
-    //       console.log('signin.35' + 'Usuário logado');
-    //       router.replace('/dashboard');
-    //       //<Redirect href="/dashboard" />;
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     console.log(error);
-    //   });
-    router.replace('/dashboard');
-  }
-
   function replacePass() {
-    router.push('/newpass');
+    router.push('(auth)/newpass');
   }
 
   function addUser() {
-    router.push('/newuser');
+    router.push('(auth)/newuser');
   }
 
   return (
     <KeyboardAvoidingView style={styles.background}>
+      <Stack.Screen
+        options={{
+          title: 'Signin',
+          headerShown: false,
+        }}
+      />
       <EVotoLogo />
       <View style={styles.container}>
         <Input
@@ -72,9 +70,18 @@ export default function Signin() {
           value={userPassword}
           onChangeText={setUserPassword}
         />
-        <Text style={styles.errText}>Email ou Senha não conferem!</Text>
 
-        <Button title="Acessar" color="#2FDBBC" onPress={handleLogin} />
+        {errorMessageShow ? (
+          <Text style={styles.errText}>Email ou Senha não conferem!</Text>
+        ) : (
+          <Text></Text>
+        )}
+
+        {!btnSend ? (
+          <Button title="Acessar" color="gray" onPress={() => {}} />
+        ) : (
+          <Button title="Acessar" color="#2FDBBC" onPress={handleLogin} />
+        )}
 
         <View style={styles.subButton}>
           <Pressable onPress={addUser}>

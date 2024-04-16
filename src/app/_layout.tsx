@@ -1,32 +1,28 @@
-import { Slot, Stack } from 'expo-router';
-import { SessionProvider } from './login/ctx';
+import { Stack } from 'expo-router';
+import { SessionProvider } from '../context/ctx';
+
+import * as SplashScreen from 'expo-splash-screen';
+
+export {
+  // Catch any errors thrown by the Layout component.
+  ErrorBoundary,
+} from 'expo-router';
 
 export const unstable_settings = {
   // Ensure any route can link back to `/`
   initialRouteName: 'index',
 };
 
-export default function Root() {
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+//SplashScreen.preventAutoHideAsync();
+
+export default function RootLayout() {
   return (
     <SessionProvider>
-      <Slot />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, title: 'dashboard' }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false, title: 'autentica' }} />
+      </Stack>
     </SessionProvider>
-
-    // <Stack
-    //   screenOptions={{
-    //     headerStyle: {
-    //       backgroundColor: '#F5F5F5',
-    //     },
-    //     headerTintColor: 'black',
-    //     headerTitleStyle: { fontWeight: 'bold' },
-    //   }}
-    // >
-    //   <Stack.Screen name="index" options={{ title: 'Bem Vindo', headerShown: false }} />
-    //   <Stack.Screen name="signin" options={{ headerShown: false, title: 'Bem Vindo' }} />
-
-    //   <Stack.Screen name="dashboard" options={{ headerShown: false }} />
-    //   <Stack.Screen name="login" options={{ headerShown: false }} />
-    //   <Stack.Screen name="(screens)" options={{ headerShown: false }} />
-    // </Stack>
   );
 }

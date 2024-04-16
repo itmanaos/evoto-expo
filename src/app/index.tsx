@@ -1,16 +1,17 @@
 import { View, Text, KeyboardAvoidingView, Image, StyleSheet } from 'react-native';
 import React from 'react';
 import { Button } from '@/components/Button';
-import { router } from 'expo-router';
+import { Stack, router } from 'expo-router';
 
 export default function index() {
-  function handleSubmit() {
-    router.replace('/signin');
-    return;
-  }
-
   return (
     <KeyboardAvoidingView style={styles.background}>
+      <Stack.Screen
+        options={{
+          title: 'Overview',
+          headerShown: false,
+        }}
+      />
       <View style={styles.containerLogo}>
         <Image source={require('src/assets/evoto.png')} />
       </View>
@@ -19,7 +20,7 @@ export default function index() {
           <Text style={{ fontSize: 28, color: '#2FDBBC', fontWeight: 'bold' }}>Bem Vindo ao</Text>
           <Text style={{ fontSize: 28 }}>Sistema de Campanhas</Text>
         </View>
-        <Button title="Acessar" color="#2FDBBC" onPress={handleSubmit} />
+        <Button title="Acessar" color="#2FDBBC" onPress={() => router.replace('(auth)/signin/')} />
       </View>
       <View style={styles.containerWfclogo}>
         <Image source={require('src/assets/wfclogo.png')} />

@@ -2,11 +2,17 @@ import * as SecureStore from 'expo-secure-store';
 import * as React from 'react';
 import { Platform } from 'react-native';
 
-type UseStateHook<T> = [[boolean, T | null], (value: T | null) => void];
+type UseStateHook<T> = [[boolean, T | null, string], (value: T | null) => void];
 
-function useAsyncState<T>(initialValue: [boolean, T | null] = [true, null]): UseStateHook<T> {
+function useAsyncState<T>(
+  initialValue: [boolean, T | null, string] = [true, null, '']
+): UseStateHook<T> {
   return React.useReducer(
-    (state: [boolean, T | null], action: T | null = null): [boolean, T | null] => [false, action],
+    (state: [boolean, T | null, string], action: T | null = null): [boolean, T | null, string] => [
+      false,
+      action,
+      '',
+    ],
     initialValue
   ) as UseStateHook<T>;
 }

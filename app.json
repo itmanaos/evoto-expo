@@ -12,11 +12,10 @@
       "resizeMode": "contain",
       "backgroundColor": "#D9D9D9"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.itmanaos.evotoexpo"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,10 +24,7 @@
       },
       "package": "com.itmanaos.evotoexpo"
     },
-    "plugins": [
-      "expo-router",
-      "expo-secure-store"
-    ],
+    "plugins": ["expo-router", "expo-secure-store"],
     "extra": {
       "router": {
         "origin": false
