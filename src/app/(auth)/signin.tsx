@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, KeyboardAvoidingView, Pressable, Alert } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Pressable } from 'react-native';
 import React, { useContext, useState, useEffect } from 'react';
 import { Redirect, Stack, router } from 'expo-router';
 import EVotoLogo from '@/components/EVotoLogo';
@@ -20,10 +20,10 @@ export default function Signin() {
   }
 
   useEffect(() => {
-    if (userEmail !== '' || userPassword !== '') {
-      setErrorMessageShow(false);
-    } else {
+    if (userPassword.length > 0 && userEmail.length > 0) {
       setBtnSend(true);
+    } else {
+      setBtnSend(false);
     }
   });
 
@@ -72,15 +72,15 @@ export default function Signin() {
         />
 
         {errorMessageShow ? (
-          <Text style={styles.errText}>Email ou Senha não conferem!</Text>
+          <Text style={styles.errText}>Email ou Senha não podem ser vazios!</Text>
         ) : (
-          <Text></Text>
+          <Text style={{ display: 'none' }}></Text>
         )}
 
-        {!btnSend ? (
-          <Button title="Acessar" color="gray" onPress={() => {}} />
-        ) : (
+        {btnSend ? (
           <Button title="Acessar" color="#2FDBBC" onPress={handleLogin} />
+        ) : (
+          <Button title="Acessar" color="gray" onPress={() => {}} />
         )}
 
         <View style={styles.subButton}>
@@ -145,12 +145,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   errText: {
-    color: 'red',
+    color: '#ff0000',
     fontSize: 15,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,
-    display: 'none',
   },
   containerWfclogo: {
     justifyContent: 'center',

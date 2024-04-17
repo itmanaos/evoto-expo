@@ -2,11 +2,9 @@ import { View, StyleSheet, FlatList, SafeAreaView, StatusBar } from 'react-nativ
 import MapView, { Marker } from 'react-native-maps';
 import React, { useState } from 'react';
 import { categorias } from '@/database/modals/categorias';
-import { tipoOcorrencias } from '@/database/modals/tipoOcorrencias';
 import { ICategory } from '@/database/interfaces/ITipoOcorrencias';
 import { SelectCategoria } from '@/components/SelectCategoria';
-import { ModalCategorias } from '@/components/ModalCategorias';
-import { router } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 
 export interface IMarker {
   category: string;
@@ -22,11 +20,20 @@ export default function Denuncias() {
   const [markers, setMarkers] = useState<IMarker[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<ICategory>(categorias[0]);
   const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
 
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
-  };
   //console.log('denuncias.28 - ' + categorias.length);
+
+  function handleSelectCategory(category: ICategory) {
+    setSelectedCategory(category);
+    router.push({
+      pathname: '/denuncias/selectsubcateg',
+      params: {
+        categTitle: category.label,
+        categkey: category?.key,
+      },
+    });
+  }
 
   return (
     <>
@@ -61,15 +68,12 @@ export default function Denuncias() {
                 itemKey={item.key}
                 categ={item}
                 onPress={() => {
-                  // setSelectedCategory(item);
-                  // toggleModal();
-                  router.push('/denuncias/select-subcateg');
+                  handleSelectCategory(item);
                 }}
                 styleSelect={[styles.categoryItem]}
                 categoryItemStyle={[
                   {
                     height: 80,
-                    //backgroundColor: 'transparent',
                     width: 80,
                   },
                 ]}
@@ -78,14 +82,6 @@ export default function Denuncias() {
           />
         </View>
       </SafeAreaView>
-
-      {/* <ModalCategorias
-        headerTitle="Selecione o Tipo de Ocorrência"
-        categTitle={selectedCategory.label}
-        onRequestClose={toggleModal}
-        modalVisible={modalVisible}
-        listTipoCategories={tipoOcorrencias.filter((tipo) => tipo.categ === selectedCategory?.key)}
-      /> */}
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { View, Text, KeyboardAvoidingView, TextInput, Pressable, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from 'firebaseConfig';
 import { router } from 'expo-router';
@@ -9,6 +9,15 @@ import { Button } from '@/components/Button';
 
 export default function Newpass() {
   const [userEmail, setUserEmail] = useState('');
+  const [btnSend, setBtnSend] = useState(false);
+
+  useEffect(() => {
+    if (userEmail.length > 0) {
+      setBtnSend(true);
+    } else {
+      setBtnSend(false);
+    }
+  });
 
   function handleSubmit() {
     if (userEmail !== '') {
@@ -45,7 +54,12 @@ export default function Newpass() {
           value={userEmail}
         />
         <View style={styles.btnContainer}>
-          <Button title="Redefinir" color="#2FDBBC" onPress={handleSubmit} />
+          {btnSend ? (
+            <Button title="Redefinir" color="#2FDBBC" onPress={handleSubmit} />
+          ) : (
+            <Button title="Redefinir" color="gray" onPress={() => {}} />
+          )}
+
           <Button
             title="Cancelar"
             color="#db2f32"
