@@ -22,7 +22,12 @@
         "foregroundImage": "src/assets/adaptive-icon.png",
         "backgroundColor": "#e1e1e1"
       },
-      "package": "com.itmanaos.evotoexpo"
+      "package": "com.itmanaos.evotoexpo",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDjN6h-9OEipaVMyERQmSXfvbNK-NPEW3c"
+        }
+      }
     },
     "plugins": ["expo-router", "expo-secure-store"],
     "extra": {

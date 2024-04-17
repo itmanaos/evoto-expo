@@ -27,16 +27,31 @@ export default function index({ pesq, onPress, ...rest }: Props) {
         </View>
 
         <View style={styles.qtdeline}>
-          <Text style={styles.textContent}>DT INICIO: {pesq.datainicio}</Text>
-          <Text style={styles.textContent}>DT LIMITE: {pesq.datafim}</Text>
+          <View>
+            <Text>DT INICIO</Text>
+            <Text style={styles.textContent}>{pesq.datainicio}</Text>
+          </View>
+          <View>
+            <Text>DT LIMITE</Text>
+            <Text style={styles.textContent}>D{pesq.datafim}</Text>
+          </View>
         </View>
 
         <Text style={styles.textSubtitulo}>AMOSTRA DE PÚBLICO</Text>
 
         <View style={styles.qtdeline}>
-          <Text style={styles.textContent}>QTDE MIN: {pesq.qtdeminima}</Text>
-          <Text style={styles.textContent}>QTDE MAX: {pesq.qtdemaxima}</Text>
-          <Text style={styles.textContent}>QTDE ATUAL: {pesq.qtdeatual}</Text>
+          <View>
+            <Text>QTDE MIN</Text>
+            <Text style={styles.textContent}>{pesq.qtdeminima}</Text>
+          </View>
+          <View>
+            <Text>QTDE MAX</Text>
+            <Text style={styles.textContent}>{pesq.qtdemaxima}</Text>
+          </View>
+          <View>
+            <Text>QTDE ATUAL</Text>
+            <Text style={styles.textContent}>{pesq.qtdeatual}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>

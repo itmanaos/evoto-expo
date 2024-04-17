@@ -4,7 +4,8 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     justifyContent: 'center',
-    maxWidth: 350,
+    width: '90%',
+    //maxWidth: 350,
     borderRadius: 10,
     padding: 0,
     margin: 10,
@@ -28,9 +29,6 @@ export const styles = StyleSheet.create({
   textSubtitulo: {
     fontSize: 16,
     fontWeight: 'bold',
-    borderTopColor: '#000',
-    borderColor: '#000',
-    borderTopWidth: 1,
     marginTop: 10,
     textAlign: 'center',
   },
