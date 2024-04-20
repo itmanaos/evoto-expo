@@ -1,7 +1,11 @@
+export const pesqStatusDesc = ['CANCELADA', 'ATIVA', 'CONCLUIDA', 'SUSPENSA'];
+export const pesqStatusColor = ['red', 'blue', 'green', 'orange'];
+
 export const pesquisas = [
   {
     key: 1,
     reg: '000000001',
+    datareg: '2022-01-01',
     nome: 'Eleitoral Prefeito 2024 Abril',
     descricao: 'Pesquisa para Candidatura a Prefeitos de Manaus, Eleições 2024, todas as Regiões',
     datainicio: '2022-01-01',
@@ -9,12 +13,13 @@ export const pesquisas = [
     qtdeminima: 10,
     qtdemaxima: 100,
     qtdeatual: 10,
-    situacao: true,
+    situacao: 0,
     tipo: 'multiplo',
   },
   {
     key: 2,
     reg: '000000001',
+    datareg: '2022-01-01',
     nome: 'Eleitoral Vereadores 2024 Abril',
     descricao: 'Pesquisa para Candidatura a Prefeitos de Manaus, Eleições 2024, todas as Regiões',
     datainicio: '2022-01-01',
@@ -22,12 +27,13 @@ export const pesquisas = [
     qtdeminima: 10,
     qtdemaxima: 100,
     qtdeatual: 10,
-    situacao: true,
+    situacao: 1,
     tipo: 'multiplo',
   },
   {
     key: 3,
     reg: '000000001',
+    datareg: '2022-01-01',
     nome: 'Eleitoral Prefeito 2024 Maio',
     descricao: 'Pesquisa para Candidatura a Prefeitos de Manaus, Eleições 2024, todas as Regiões',
     datainicio: '2022-01-01',
@@ -35,12 +41,13 @@ export const pesquisas = [
     qtdeminima: 10,
     qtdemaxima: 100,
     qtdeatual: 10,
-    situacao: true,
+    situacao: 2,
     tipo: 'multiplo',
   },
   {
     key: 4,
     reg: '000000001',
+    datareg: '2022-01-01',
     nome: 'Eleitoral Vereadores 2024 Maio',
     descricao: 'Pesquisa para Candidatura a Prefeitos de Manaus, Eleições 2024, todas as Regiões',
     datainicio: '2022-01-01',
@@ -48,7 +55,7 @@ export const pesquisas = [
     qtdeminima: 10,
     qtdemaxima: 100,
     qtdeatual: 10,
-    situacao: true,
+    situacao: 3,
     tipo: 'multiplo',
   },
 ];

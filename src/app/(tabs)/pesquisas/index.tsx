@@ -1,15 +1,33 @@
-import { Alert, FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import CardPesquisa from '@/components/CardPesquisa';
 
 import { pesquisas } from '@/database/modals/pesquisas';
 import { IPesquisas } from '@/database/interfaces/IPesquisas';
+import { Tabs, router } from 'expo-router';
 
 export default function Pesquisas() {
   const [pesquisaSelected, setPesquisaSelected] = useState<IPesquisas>();
 
+  function handleSelectPesquisa(pesquisa: IPesquisas) {
+    setPesquisaSelected(pesquisa);
+    console.log('pesquisas.14 ' + pesquisa.nome);
+    router.push({
+      pathname: '/pesquisas/pesqdetail',
+      params: {
+        data: JSON.stringify(pesquisa),
+      },
+    });
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.headerContainer}>
+      <Tabs.Screen
+        options={{
+          headerShown: true,
+          title: 'Pesquisas',
+        }}
+      />
       <FlatList
         data={pesquisas}
         keyExtractor={(item) => item.key.toString()}
@@ -22,8 +40,7 @@ export default function Pesquisas() {
           <CardPesquisa
             pesq={item}
             onPress={() => {
-              setPesquisaSelected(item);
-              Alert.alert('Item Selecionado ' + item.key);
+              handleSelectPesquisa(item);
             }}
           />
         )}
@@ -37,18 +54,5 @@ const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
     alignItems: 'center',
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#e1e1e1',
-  },
-  headerText: {
-    color: 'white',
-    fontSize: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    letterSpacing: 1,
-    marginBottom: 8,
   },
 });

@@ -4,7 +4,7 @@ import { styles } from './styles';
 
 type Props = PressableProps & {
   title: string;
-  //   onPress: () => void;
+  //onPress: () => void;
   color: string;
 };
 

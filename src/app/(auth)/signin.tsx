@@ -1,11 +1,18 @@
-import { View, Text, StyleSheet, KeyboardAvoidingView, Pressable } from 'react-native';
-import React, { useContext, useState, useEffect } from 'react';
-import { Redirect, Stack, router } from 'expo-router';
+import {
+  View,
+  Text,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Pressable,
+  ActivityIndicator,
+} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Stack, router } from 'expo-router';
 import EVotoLogo from '@/components/EVotoLogo';
 import WFCLogo from '@/components/WFCLogo';
-import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import { AuthContext } from '@/context/ctx';
+import { AuthUse } from '@/context/ctx';
+import { ButtonSend } from '@/components/ButtonSend';
 
 export default function Signin() {
   const [userEmail, setUserEmail] = useState('');
@@ -13,11 +20,7 @@ export default function Signin() {
   const [errorMessageShow, setErrorMessageShow] = useState(false);
   const [btnSend, setBtnSend] = useState(false);
 
-  const { userName, session, isLoading, signIn } = useContext(AuthContext);
-
-  if (session != null) {
-    return <Redirect href="(tabs)/main/" />;
-  }
+  const { isLoading, logIn } = AuthUse();
 
   useEffect(() => {
     if (userPassword.length > 0 && userEmail.length > 0) {
@@ -31,7 +34,7 @@ export default function Signin() {
     if (userEmail === '' || userPassword === '') {
       setErrorMessageShow(true);
     } else {
-      signIn(userEmail, userPassword);
+      logIn(userEmail, userPassword);
     }
   }
 
@@ -62,7 +65,6 @@ export default function Signin() {
           onChangeText={setUserEmail}
           value={userEmail}
         />
-
         <Input
           placeholder="Senha"
           autoCorrect={false}
@@ -70,25 +72,22 @@ export default function Signin() {
           value={userPassword}
           onChangeText={setUserPassword}
         />
-
         {errorMessageShow ? (
           <Text style={styles.errText}>Email ou Senha não podem ser vazios!</Text>
         ) : (
           <Text style={{ display: 'none' }}></Text>
         )}
-
-        {btnSend ? (
-          <Button title="Acessar" color="#2FDBBC" onPress={handleLogin} />
+        {isLoading ? (
+          <ActivityIndicator size="large" color={'#939393'} />
         ) : (
-          <Button title="Acessar" color="gray" onPress={() => {}} />
+          <ButtonSend title="Acessar" btnSend={btnSend} onPress={handleLogin} />
         )}
-
         <View style={styles.subButton}>
           <Pressable onPress={addUser}>
-            <Text style={styles.textSubButton}>Novo Usuario</Text>
+            <Text>Novo Usuario</Text>
           </Pressable>
           <Pressable onPress={replacePass}>
-            <Text style={styles.textSubButton}>Esqueceu a senha?</Text>
+            <Text>Esqueceu a senha?</Text>
           </Pressable>
         </View>
       </View>

@@ -44,9 +44,9 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="pesquisas/index"
+        name="pesquisas"
         options={{
-          headerShown: true,
+          headerShown: false,
           title: 'Pesquisas',
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {

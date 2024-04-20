@@ -1,116 +1,144 @@
-import React, { createContext, useContext, useState } from 'react';
-import { useStorageState } from './useStorageState';
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { Redirect, router } from 'expo-router';
-import { auth } from 'firebaseConfig';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { router } from 'expo-router';
+import { auth, getAuth } from 'firebaseConfig';
+import { AuthType, TokenType, UserDataType } from '@/database/interfaces/AuthTyped';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 
-export const AuthContext = createContext<{
-  signIn: (email: string, password: string) => void;
-  signOut: () => void;
-  session?: string | null;
-  isLoading: boolean;
-  userName: string | null;
-}>({
-  signIn: () => null,
-  signOut: () => null,
-  session: null,
-  isLoading: false,
-  userName: null,
-});
+export const AuthContext = createContext<AuthType>({} as AuthType);
 
-//export const AuthContext = createContext({});
-
-// interface UserName {
-//   userEmail?: string | null;
-//   status: boolean;
-//   name?: string | null;
-//   userDisplayName?: string | null;
-//   userID?: string | null;
-// }
-
-// This hook can be used to access the user info.
-export function useSession() {
-  const value = useContext(AuthContext);
-
-  if (process.env.NODE_ENV !== 'production') {
-    if (!value) {
-      throw new Error('useSession must be wrapped in a <SessionProvider />');
-    }
-  }
-
-  return value;
-}
-
-export function SessionProvider(props: React.PropsWithChildren) {
-  //const [[isLoading, session, username], setSession] = useStorageState('session');
-  const [session, setSession] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [userName, setUsername] = useState<string | null>(null);
+export const SessionProvider = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [globalLoading, setGlobalLoading] = useState(false);
+  const [userData, setUserData] = useState<UserDataType | null>(null);
+  const [token, setToken] = useState<TokenType | null>(null);
 
   // const unsub = onAuthStateChanged(auth, (user) => {
-  //   setSession('usuario');
-  //   setIsLoading(false);
-  //   setUsername({
-  //     userEmail: user?.email,
-  //     status: true,
-  //     name: user?.email,
-  //     userDisplayName: user?.displayName,
-  //     userID: user?.uid,
-  //   });
+  //   setGlobalLoading(true);
+  //   try {
+  //     const UserDataLogged = {
+  //       name: user.displayName,
+  //       email: user.email,
+  //       photo: user.email,
+  //     } as UserDataType;
+  //     setUserData(UserDataLogged);
+  //     const TokenLogged = {
+  //       refresh: user.refreshToken,
+  //       token: user.refreshToken,
+  //     };
+  //     setToken(TokenLogged);
+  //   } catch (error: any) {
+  //     setUserData({} as UserDataType);
+  //     setToken({} as TokenType);
+  //     Alert.alert(error.message);
+  //   } finally {
+  //     setGlobalLoading(false);
+  //   }
   // });
+
+  useEffect(() => {
+    AuthVerify();
+  }, []);
+
+  const AuthVerify = async () => {
+    setGlobalLoading(true);
+    try {
+      const tokenStorage = await AsyncStorage.getItem('@token');
+      const dataUserStorage = await AsyncStorage.getItem('@user');
+
+      console.log('ctx.AuthVerify.50' + tokenStorage);
+      console.log('ctx.AuthVerify.51' + dataUserStorage);
+
+      setUserData(dataUserStorage != null ? JSON.parse(dataUserStorage) : null);
+      setToken(tokenStorage != null ? JSON.parse(tokenStorage) : null);
+    } catch (error: any) {
+      setUserData(null);
+      setToken(null);
+      Alert.alert(error.message);
+    } finally {
+      setGlobalLoading(false);
+    }
+  };
+
+  const logIn = async (email: string, password: string) => {
+    setIsLoading(true);
+    console.log('ctx.41' + 'Entrou no appSignIn');
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        const userToken = userCredential.user.refreshToken;
+        if (user) {
+          const UserDataLogged = {
+            name: userCredential.user.displayName,
+            email: userCredential.user.email,
+            photo: userCredential.user.email,
+          } as UserDataType;
+          setUserData(UserDataLogged);
+          const json_data = JSON.stringify(UserDataLogged);
+          AsyncStorage.setItem('@user', json_data);
+          console.log('ctx.LogIn.93 ' + json_data);
+          const TokenLogged = {
+            refresh: userCredential.user.refreshToken,
+            token: userCredential.user.refreshToken,
+          };
+          setToken(TokenLogged);
+          const json_token = JSON.stringify(TokenLogged);
+          AsyncStorage.setItem('@token', json_token);
+          console.log('ctx.LogIn.101 ' + json_token + ' Usuario Logado!!');
+          router.replace('(tabs)/main/');
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error);
+        setIsLoading(false);
+        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+          alert('Usuário ou senha incorretos');
+        } else if (error.code === 'auth/too-many-requests') {
+          alert('Muitas tentativas, tente novamente mais tarde');
+        } else {
+          alert('Ocorreu um erro ao tentar fazer login, tente novamente mais tarde');
+        }
+      });
+  };
+
+  const logOut = async () => {
+    setIsLoading(true);
+    await signOut(auth)
+      .then(() => {
+        setUserData(null);
+        setToken(null);
+        AsyncStorage.removeItem('@token');
+        AsyncStorage.removeItem('@user');
+        console.log('ctx.119' + 'Usuário deslogado');
+        router.push('/');
+      })
+      .catch((error) => {
+        const errorMessage = error.errorMessage;
+        console.log(errorMessage);
+      });
+    setIsLoading(false);
+  };
 
   return (
     <AuthContext.Provider
       value={{
-        signIn: async (email, password) => {
-          setIsLoading(true);
-          console.log('ctx.41' + 'Entrou no appSignIn');
-          await signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-              const user = userCredential.user;
-              if (user) {
-                console.log('ctx.72' + 'Usuário logado');
-                //setSession('ok');
-                //console.log('ctx.74' + session);
-                setIsLoading(false);
-                setUsername(user.email);
-                router.replace('(tabs)/main/');
-              }
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              console.log(error);
-              setIsLoading(false);
-              if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-                alert('Usuário ou senha incorretos');
-              } else if (error.code === 'auth/too-many-requests') {
-                alert('Muitas tentativas, tente novamente mais tarde');
-              } else {
-                alert('Ocorreu um erro ao tentar fazer login, tente novamente mais tarde');
-              }
-            });
-        },
-        signOut: async () => {
-          setIsLoading(true);
-          const logOut = await signOut(auth)
-            .then(() => {
-              setSession(null);
-              setIsLoading(false);
-              setUsername(null);
-              router.push('/');
-            })
-            .catch((error) => {
-              const errorMessage = error.errorMessage;
-              console.log(errorMessage);
-            });
-        },
-        session,
+        logIn,
+        logOut,
         isLoading,
-        userName,
+        userData,
+        globalLoading,
+        token,
       }}
     >
-      {props.children}
+      {children}
     </AuthContext.Provider>
   );
-}
+};
+
+export const AuthUse = () => {
+  const context = useContext(AuthContext);
+  return context;
+};

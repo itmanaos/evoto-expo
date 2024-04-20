@@ -1,6 +1,7 @@
 export interface IPesquisas {
   key: number;
   reg: string;
+  datareg: string;
   nome: string;
   descricao: string;
   datainicio: string;
@@ -8,6 +9,6 @@ export interface IPesquisas {
   qtdeminima: number;
   qtdemaxima: number;
   qtdeatual: number;
-  situacao: boolean;
+  situacao: number;
   tipo: string;
 }

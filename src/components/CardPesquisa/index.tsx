@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity, TouchableOpacityProps } from 'react-nativ
 import React from 'react';
 import { styles } from './styles';
 import { IPesquisas } from '@/database/interfaces/IPesquisas';
+import { pesqStatusColor, pesqStatusDesc } from '@/database/modals/pesquisas';
+import { Ionicons } from '@expo/vector-icons';
 
 type Props = TouchableOpacityProps & {
   pesq: IPesquisas;
@@ -9,48 +11,57 @@ type Props = TouchableOpacityProps & {
 };
 
 export default function index({ pesq, onPress, ...rest }: Props) {
+  const situacao = pesqStatusDesc[pesq.situacao];
+  const cor = pesqStatusColor[pesq.situacao];
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container} key={pesq.key}>
+    <TouchableOpacity onPress={onPress} key={pesq.key}>
       <View style={styles.container}>
-        <Text style={styles.status}>STATUS: {pesq.situacao ? <Text>data</Text> : null}</Text>
-        <Text style={styles.header}>CODIGO: {pesq.key}</Text>
-        <Text style={styles.textContent}>REGISTRO: {pesq.reg}</Text>
-        <Text style={styles.textTitulo}>NOME: {pesq.nome}</Text>
-        <Text style={styles.textContent}>Descrição: {pesq.descricao}</Text>
-
-        <View style={styles.qtdeline}>
-          <Text style={styles.textContent}>Tipo: {pesq.tipo}</Text>
+        <View style={styles.inlineContent}>
+          <Text style={styles.keyBedge}> {pesq.key}</Text>
+          <Text style={[styles.statusBedge, { backgroundColor: cor }]}>{situacao}</Text>
         </View>
-
-        <View>
-          <Text style={styles.textSubtitulo}>PERIODO DA PESQUISA</Text>
+        <Text style={styles.tituloText}>{pesq.nome}</Text>
+        <View style={styles.inlineContent}>
+          <Text style={styles.contentText}>Reg. nº: {pesq.reg}</Text>
+          <Text style={styles.contentText}>Dt. Reg. {pesq.datareg}</Text>
+          <Text style={styles.contentText}>Tipo: {pesq.tipo}</Text>
         </View>
+        <View style={styles.inlineContent}>
+          <View style={styles.periodoContent}>
+            <Text style={styles.subtituloText}>PERIODO DA PESQUISA</Text>
+            <View style={styles.inlineContent}>
+              <View>
+                <Text>DT INICIO</Text>
+                <Text style={styles.contentText}>{pesq.datainicio}</Text>
+              </View>
+              <View>
+                <Text>DT LIMITE</Text>
+                <Text style={styles.contentText}>D{pesq.datafim}</Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.amostraContent}>
+            <Text style={styles.subtituloText}>AMOSTRA</Text>
 
-        <View style={styles.qtdeline}>
-          <View>
-            <Text>DT INICIO</Text>
-            <Text style={styles.textContent}>{pesq.datainicio}</Text>
-          </View>
-          <View>
-            <Text>DT LIMITE</Text>
-            <Text style={styles.textContent}>D{pesq.datafim}</Text>
-          </View>
-        </View>
-
-        <Text style={styles.textSubtitulo}>AMOSTRA DE PÚBLICO</Text>
-
-        <View style={styles.qtdeline}>
-          <View>
-            <Text>QTDE MIN</Text>
-            <Text style={styles.textContent}>{pesq.qtdeminima}</Text>
-          </View>
-          <View>
-            <Text>QTDE MAX</Text>
-            <Text style={styles.textContent}>{pesq.qtdemaxima}</Text>
-          </View>
-          <View>
-            <Text>QTDE ATUAL</Text>
-            <Text style={styles.textContent}>{pesq.qtdeatual}</Text>
+            <View style={styles.inlineContent}>
+              <View>
+                <Text>MIN</Text>
+                <Text style={styles.contentText}>{pesq.qtdeminima}</Text>
+              </View>
+              <View>
+                <Text>MAX</Text>
+                <Text style={styles.contentText}>{pesq.qtdemaxima}</Text>
+              </View>
+              <View>
+                <Text>ATUAL</Text>
+                <Text style={styles.contentText}>{pesq.qtdeatual}</Text>
+              </View>
+              {pesq.situacao === 1 ? (
+                <View style={styles.iconContainer}>
+                  <Ionicons name="add-circle" size={52} color="green" />
+                </View>
+              ) : null}
+            </View>
           </View>
         </View>
       </View>

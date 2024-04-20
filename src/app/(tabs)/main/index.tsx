@@ -1,20 +1,20 @@
 import { View, Text, Pressable, SafeAreaView } from 'react-native';
-import React, { useContext } from 'react';
-import { Link, Redirect } from 'expo-router';
+import React from 'react';
+import { Link, router } from 'expo-router';
 import { styles } from '@/styles/styles';
-import { AuthContext } from '@/context/ctx';
+import { AuthUse } from '@/context/ctx';
 
 export default function Main() {
-  const { userName, signOut } = useContext(AuthContext);
+  const { isLoading, logOut, userData, globalLoading } = AuthUse();
 
-  if (userName == null) {
-    return <Redirect href="/" />;
+  if (!userData) {
+    router.replace('(auth)/signin/');
   }
 
   return (
     <SafeAreaView style={styles.background}>
       <View>
-        <Pressable onPress={() => signOut()}>
+        <Pressable onPress={() => logOut()}>
           <Text style={styles.textLink}>Logout</Text>
         </Pressable>
         <Link style={styles.textLink} href={'/atividades'}>

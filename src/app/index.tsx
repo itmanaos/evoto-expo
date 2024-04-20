@@ -2,13 +2,31 @@ import { View, Text, KeyboardAvoidingView, Image, StyleSheet } from 'react-nativ
 import React from 'react';
 import { Button } from '@/components/Button';
 import { Stack, router } from 'expo-router';
+import { AuthUse } from '@/context/ctx';
+import { TokenType } from '@/database/interfaces/AuthTyped';
 
 export default function index() {
+  const { userData, globalLoading, token } = AuthUse();
+
+  function handleSignIn() {
+    if (userData) {
+      router.replace('(tabs)/main/');
+    } else {
+      router.replace('(auth)/signin/');
+    }
+  }
+
+  if (globalLoading)
+    return (
+      <View style={styles.background}>
+        <Text>App carregando...</Text>
+      </View>
+    );
   return (
     <KeyboardAvoidingView style={styles.background}>
       <Stack.Screen
         options={{
-          title: 'Overview',
+          title: 'Bem Vindos',
           headerShown: false,
         }}
       />
@@ -20,7 +38,7 @@ export default function index() {
           <Text style={{ fontSize: 28, color: '#2FDBBC', fontWeight: 'bold' }}>Bem Vindo ao</Text>
           <Text style={{ fontSize: 28 }}>Sistema de Campanhas</Text>
         </View>
-        <Button title="Acessar" color="#2FDBBC" onPress={() => router.replace('(auth)/signin/')} />
+        <Button title="Acessar" color="#2FDBBC" onPress={handleSignIn} />
       </View>
       <View style={styles.containerWfclogo}>
         <Image source={require('src/assets/wfclogo.png')} />
