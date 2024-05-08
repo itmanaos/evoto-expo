@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     margin: 4,
   },
   subtituloText: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'center',
   },

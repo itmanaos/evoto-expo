@@ -47,8 +47,8 @@ export const SessionProvider = ({ children }) => {
       const tokenStorage = await AsyncStorage.getItem('@token');
       const dataUserStorage = await AsyncStorage.getItem('@user');
 
-      console.log('ctx.AuthVerify.50' + tokenStorage);
-      console.log('ctx.AuthVerify.51' + dataUserStorage);
+      // console.log('ctx.AuthVerify.50' + tokenStorage);
+      // console.log('ctx.AuthVerify.51' + dataUserStorage);
 
       setUserData(dataUserStorage != null ? JSON.parse(dataUserStorage) : null);
       setToken(tokenStorage != null ? JSON.parse(tokenStorage) : null);
