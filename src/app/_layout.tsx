@@ -1,8 +1,6 @@
 import { Stack } from 'expo-router';
 import { SessionProvider } from '../context/ctx';
 
-import * as SplashScreen from 'expo-splash-screen';
-
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,

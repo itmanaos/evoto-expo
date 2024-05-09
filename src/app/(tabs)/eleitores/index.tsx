@@ -13,28 +13,34 @@ import { eleitores } from '@/database/modals/eleitores';
 import { IEleitores } from '@/database/interfaces/IEleitores';
 import { Feather } from '@expo/vector-icons';
 import { Input } from '@/components/Input';
+import CardEleitoresCad from '@/components/CardEleitoresCad';
 
 export default function Eleitores() {
   const [eleitorSelected, setEleitorSelected] = useState<IEleitores>();
   const [eleitoresList, setEleitoresList] = useState<IEleitores[]>(
-    eleitores.sort((a, b) => a.nome.localeCompare(b.nome))
+    eleitores.sort((a, b) => a.nome.localeCompare(b.nome)).filter((eleitor) => eleitor.status == 1)
   );
+  const [eleitoresListBase, setEleitoresListBase] = useState<IEleitores[]>(eleitoresList);
+
   const [pesquisa, setPesquisa] = useState('');
 
-  function handlePesquisa(text: string) {
-    setPesquisa(text);
-  }
+  const totCadastrados = eleitores.filter((eleitor) => eleitor.status == 1).length;
+  const totEmCadastro = eleitores.filter((eleitor) => eleitor.status == 0).length;
 
   useEffect(() => {
     if (pesquisa.length > 0) {
-      const newList = eleitores.filter((eleitor) =>
+      const newList = eleitoresListBase.filter((eleitor) =>
         eleitor.nome.toLowerCase().includes(pesquisa.toLowerCase())
       );
       setEleitoresList(newList);
     } else {
-      setEleitoresList(eleitores);
+      setEleitoresList(eleitoresListBase);
     }
   }, [pesquisa]);
+
+  function handlePesquisa(text: string) {
+    setPesquisa(text);
+  }
 
   function handleSelectPesquisa(eleitor: IEleitores) {
     setEleitorSelected(eleitor);
@@ -44,6 +50,21 @@ export default function Eleitores() {
         data: JSON.stringify(eleitor),
       },
     });
+  }
+
+  function setListCadastrados() {
+    const listBase = eleitores
+      .sort((a, b) => a.nome.localeCompare(b.nome))
+      .filter((eleitor) => eleitor.status == 1);
+    setEleitoresListBase(listBase);
+    setEleitoresList(listBase);
+  }
+  function setListEmCadastro() {
+    const listBase = eleitores
+      .sort((a, b) => a.nome.localeCompare(b.nome))
+      .filter((eleitor) => eleitor.status == 0);
+    setEleitoresListBase(listBase);
+    setEleitoresList(listBase);
   }
 
   function addEleitor() {
@@ -69,7 +90,41 @@ export default function Eleitores() {
           ),
         }}
       />
-      <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15 }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          marginVertical: 8,
+          marginHorizontal: 15,
+          borderColor: '#2FDBBC',
+          borderWidth: 2,
+          borderRadius: 10,
+        }}
+      >
+        <CardEleitoresCad
+          title="CADASTRADOS"
+          cadastrados={totCadastrados}
+          color="#0000fa"
+          onPress={setListCadastrados}
+        />
+
+        <CardEleitoresCad
+          title="EM CADASTRO"
+          cadastrados={totEmCadastro}
+          color="#ff0000"
+          onPress={setListEmCadastro}
+        />
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          width: '80%',
+          alignItems: 'center',
+          marginHorizontal: 15,
+          marginBottom: 6,
+        }}
+      >
         <Feather name="search" size={30} color="#070707" style={{ marginRight: 15 }} />
         <Input
           placeholder="Nome a Pesquisar"

@@ -1,9 +1,7 @@
-import { Button, SafeAreaView, StyleSheet, TextInput, View, Text } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { useForm, Controller } from 'react-hook-form';
 import { IEleitoresForm } from '@/database/interfaces/IEleitoresForm';
-import { Input } from '@/components/Input';
 
 enum GenderEnum {
   female = 'female',
@@ -12,13 +10,6 @@ enum GenderEnum {
 }
 
 export default function Cadeleitores() {
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IEleitoresForm>({});
-
   function sendSubmit(data: IEleitoresForm) {
     console.log(data);
   }
@@ -31,26 +22,7 @@ export default function Cadeleitores() {
           title: 'Novo Eleitor',
         }}
       />
-      <View>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              placeholder="First name"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-          nome="firstName"
-        />
-        {errors.nome && <Text>This is required.</Text>}
-
-        <Button title="Submit" onPress={handleSubmit(sendSubmit)} />
-      </View>
+      <View></View>
     </SafeAreaView>
   );
 }

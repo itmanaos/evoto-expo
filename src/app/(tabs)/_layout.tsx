@@ -57,7 +57,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="equipe/index"
+        name="equipe"
         options={{
           headerShown: false,
           title: 'Equipe',

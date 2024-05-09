@@ -31,11 +31,11 @@ export default function index({ pesq, onPress, ...rest }: Props) {
             <Text style={styles.subtituloText}>PERIODO DA PESQUISA</Text>
             <View style={styles.inlineContent}>
               <View>
-                <Text>DT INICIO</Text>
+                <Text style={styles.contentText}>DT INICIO</Text>
                 <Text style={styles.contentText}>{pesq.datainicio}</Text>
               </View>
               <View>
-                <Text>DT LIMITE</Text>
+                <Text style={styles.contentText}>DT LIMITE</Text>
                 <Text style={styles.contentText}>D{pesq.datafim}</Text>
               </View>
             </View>
@@ -45,15 +45,15 @@ export default function index({ pesq, onPress, ...rest }: Props) {
 
             <View style={styles.inlineContent}>
               <View>
-                <Text>MIN</Text>
+                <Text style={styles.contentText}>MIN</Text>
                 <Text style={styles.contentText}>{pesq.qtdeminima}</Text>
               </View>
               <View>
-                <Text>MAX</Text>
+                <Text style={styles.contentText}>MAX</Text>
                 <Text style={styles.contentText}>{pesq.qtdemaxima}</Text>
               </View>
               <View>
-                <Text>ATUAL</Text>
+                <Text style={styles.contentText}>ATUAL</Text>
                 <Text style={styles.contentText}>{pesq.qtdeatual}</Text>
               </View>
               {pesq.situacao === 1 ? (
