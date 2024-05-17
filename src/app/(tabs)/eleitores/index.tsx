@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   Pressable,
+  ListRenderItemInfo,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Tabs, router } from 'expo-router';
@@ -71,6 +72,21 @@ export default function Eleitores() {
     router.push('/eleitores/cadeleitores');
   }
 
+  function renderItem({ item }: ListRenderItemInfo<IEleitores>) {
+    return (
+      <TouchableOpacity key={item.id} style={styles.container}>
+        <View style={styles.inlineContent}>
+          <Text style={styles.itemListText}> {item.nome}</Text>
+          {item.status == 1 ? (
+            <Feather name="user-check" size={20} color="#0000fa" />
+          ) : (
+            <Feather name="user-x" size={20} color="#ff0000" />
+          )}
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.headerContainer}>
       <Tabs.Screen
@@ -110,7 +126,7 @@ export default function Eleitores() {
         />
 
         <CardEleitoresCad
-          title="EM CADASTRO"
+          title="PENDENTES"
           cadastrados={totEmCadastro}
           color="#ff0000"
           onPress={setListEmCadastro}
@@ -146,18 +162,7 @@ export default function Eleitores() {
         contentContainerStyle={{
           width: '100%',
         }}
-        renderItem={({ item }) => (
-          <TouchableOpacity key={item.id} style={styles.container}>
-            <View style={styles.inlineContent}>
-              <Text style={styles.itemListText}> {item.nome}</Text>
-              {item.status == 1 ? (
-                <Feather name="user-check" size={20} color="#0000fa" />
-              ) : (
-                <Feather name="user-x" size={20} color="#ff0000" />
-              )}
-            </View>
-          </TouchableOpacity>
-        )}
+        renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={{ height: 2 }} />}
       />
     </SafeAreaView>

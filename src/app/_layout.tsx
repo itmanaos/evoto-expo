@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router';
 import { SessionProvider } from '../context/ctx';
+import { NativeBaseProvider } from 'native-base';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -16,11 +17,13 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   return (
-    <SessionProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false, title: 'dashboard' }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false, title: 'autentica' }} />
-      </Stack>
-    </SessionProvider>
+    <NativeBaseProvider>
+      <SessionProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false, title: 'dashboard' }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false, title: 'autentica' }} />
+        </Stack>
+      </SessionProvider>
+    </NativeBaseProvider>
   );
 }

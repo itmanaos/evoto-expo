@@ -4,8 +4,11 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     borderRadius: 10,
-    marginTop: 8,
-    paddingBottom: 20,
+    marginBottom: 12,
+    paddingTop: 8,
+    paddingBottom: 10,
+    borderColor: '#2FDBBC',
+    borderWidth: 2,
   },
   inlineContent: {
     flexDirection: 'row',

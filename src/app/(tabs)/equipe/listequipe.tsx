@@ -1,4 +1,11 @@
-import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  ListRenderItemInfo,
+} from 'react-native';
 import { useNavigation } from 'expo-router';
 import { membros } from '@/database/modals/membros';
 import { Feather } from '@expo/vector-icons';
@@ -31,6 +38,21 @@ export default function SelectSubCategModal() {
     setPesquisa(text);
   }
 
+  function renderItem({ item }: ListRenderItemInfo<IMembros>) {
+    return (
+      <TouchableOpacity key={item.id} style={styles.membrosContent}>
+        <Text style={styles.membrosListText}>{item.nome}</Text>
+        <Text style={styles.membrosListText}>{item.celular}</Text>
+
+        {item.status == 0 ? (
+          <Feather name="user-check" size={20} color="#0c9400" style={{ marginRight: 15 }} />
+        ) : (
+          <Feather name="user-x" size={20} color="#f80606" style={{ marginRight: 15 }} />
+        )}
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <View
@@ -61,18 +83,7 @@ export default function SelectSubCategModal() {
         contentContainerStyle={{
           width: '100%',
         }}
-        renderItem={({ item }) => (
-          <TouchableOpacity key={item.id} style={styles.membrosContent}>
-            <Text style={styles.membrosListText}>{item.nome}</Text>
-            <Text style={styles.membrosListText}>{item.celular}</Text>
-
-            {item.status == 0 ? (
-              <Feather name="user-check" size={20} color="#0c9400" style={{ marginRight: 15 }} />
-            ) : (
-              <Feather name="user-x" size={20} color="#f80606" style={{ marginRight: 15 }} />
-            )}
-          </TouchableOpacity>
-        )}
+        renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={{ height: 2 }} />}
       />
     </View>

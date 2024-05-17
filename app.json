@@ -25,7 +25,7 @@
       "package": "com.itmanaos.evotoexpo",
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyDjN6h-9OEipaVMyERQmSXfvbNK-NPEW3c"
+          "apiKey": "AIzaSyBTdFMUZglGu5MGpzf40GXlJm-AvckiyAQ"
         }
       }
     },
@@ -33,6 +33,9 @@
     "extra": {
       "router": {
         "origin": false
+      },
+      "experiments": {
+        "typedRoutes": true
       },
       "eas": {
         "projectId": "f03cba0e-ce4a-4087-a0a9-54cc524ff40a"

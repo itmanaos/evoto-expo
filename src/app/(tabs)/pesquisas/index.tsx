@@ -1,4 +1,4 @@
-import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, View, ListRenderItemInfo } from 'react-native';
 import React, { useState } from 'react';
 import CardPesquisa from '@/components/CardPesquisa';
 
@@ -19,6 +19,16 @@ export default function Pesquisas() {
       },
     });
   }
+  function renderItem({ item }: ListRenderItemInfo<IPesquisas>) {
+    return (
+      <CardPesquisa
+        pesq={item}
+        onPress={() => {
+          handleSelectPesquisa(item);
+        }}
+      />
+    );
+  }
 
   return (
     <SafeAreaView style={styles.headerContainer}>
@@ -36,14 +46,7 @@ export default function Pesquisas() {
         contentContainerStyle={{
           alignItems: 'center',
         }}
-        renderItem={({ item }) => (
-          <CardPesquisa
-            pesq={item}
-            onPress={() => {
-              handleSelectPesquisa(item);
-            }}
-          />
-        )}
+        renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={{ height: 2 }} />}
       />
     </SafeAreaView>

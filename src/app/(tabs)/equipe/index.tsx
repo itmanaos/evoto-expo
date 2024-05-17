@@ -3,15 +3,16 @@ import {
   Text,
   View,
   SafeAreaView,
-  Platform,
   Pressable,
   TouchableOpacity,
   FlatList,
+  ListRenderItemInfo,
 } from 'react-native';
 import React from 'react';
 import { Tabs, router } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import { comunicados } from '@/database/modals/comunicados';
+import { IComunicados } from '@/database/interfaces/IComunicados';
 
 export default function Equipe() {
   const showTeam = () => {
@@ -19,6 +20,33 @@ export default function Equipe() {
       pathname: '/equipe/listequipe',
     });
   };
+
+  function renderItem({ item }: ListRenderItemInfo<IComunicados>) {
+    return (
+      <TouchableOpacity key={item.id} style={styles.comunicadosBody}>
+        <View style={styles.comunicadosContent}>
+          <View style={styles.comunicadosAssunto}>
+            <Text style={styles.comunicadosDataText}>{item.data}</Text>
+            <Text style={styles.comunicadosAssuntoText}>{item.assunto}</Text>
+          </View>
+          <View style={styles.comunicadosContent}>
+            {item.status == 0 ? (
+              <Feather name="book-open" size={20} color="#070707" style={{ marginRight: 15 }} />
+            ) : (
+              <Feather name="book" size={20} color="#070707" style={{ marginRight: 15 }} />
+            )}
+
+            {item.categoria == 0 ? (
+              <Feather name="globe" size={20} color="#070707" style={{ marginRight: 15 }} />
+            ) : (
+              <Feather name="users" size={20} color="#070707" style={{ marginRight: 15 }} />
+            )}
+          </View>
+        </View>
+        <Text style={styles.comunicadoText}>{item.texto}</Text>
+      </TouchableOpacity>
+    );
+  }
   return (
     <SafeAreaView style={styles.headerContainer}>
       <Tabs.Screen
@@ -47,11 +75,13 @@ export default function Equipe() {
           <Text style={styles.coordenadorCardText}>Email: </Text>
           <Text style={styles.coordenadorCardText}>Telefone: </Text>
         </View>
-        <View style={styles.comunicadosCard}>
-          <Text style={styles.comuicadosCardTitulo}>Comunicados</Text>
-        </View>
       </View>
       <FlatList
+        ListHeaderComponent={
+          <View style={styles.comunicadosCard}>
+            <Text style={styles.comuicadosCardTitulo}>Comunicados</Text>
+          </View>
+        }
         data={comunicados}
         keyExtractor={(item) => item.id.toString()}
         numColumns={1}
@@ -59,30 +89,7 @@ export default function Equipe() {
         contentContainerStyle={{
           width: '100%',
         }}
-        renderItem={({ item }) => (
-          <TouchableOpacity key={item.id} style={styles.comunicadosBody}>
-            <View style={styles.comunicadosContent}>
-              <View style={styles.comunicadosAssunto}>
-                <Text style={styles.comunicadosDataText}>{item.data}</Text>
-                <Text style={styles.comunicadosAssuntoText}>{item.assunto}</Text>
-              </View>
-              <View style={styles.comunicadosContent}>
-                {item.status == 0 ? (
-                  <Feather name="book-open" size={20} color="#070707" style={{ marginRight: 15 }} />
-                ) : (
-                  <Feather name="book" size={20} color="#070707" style={{ marginRight: 15 }} />
-                )}
-
-                {item.categoria == 0 ? (
-                  <Feather name="globe" size={20} color="#070707" style={{ marginRight: 15 }} />
-                ) : (
-                  <Feather name="users" size={20} color="#070707" style={{ marginRight: 15 }} />
-                )}
-              </View>
-            </View>
-            <Text style={styles.comunicadoText}>{item.texto}</Text>
-          </TouchableOpacity>
-        )}
+        renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={{ height: 2 }} />}
       />
     </SafeAreaView>
@@ -106,10 +113,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     backgroundColor: '#fff',
+    borderColor: '#2FDBBC',
+    borderWidth: 2,
     shadowColor: '#000',
   },
   equipeCardTitulo: {
     fontSize: 18,
+    fontWeight: 'bold',
     paddingVertical: 4,
   },
   equipeCardText: {
@@ -123,10 +133,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     backgroundColor: '#fff',
+    borderColor: '#2FDBBC',
+    borderWidth: 2,
     shadowColor: '#000',
   },
   coordenadorCardTitulo: {
     fontSize: 18,
+    fontWeight: 'bold',
     paddingVertical: 4,
   },
   coordenadorCardText: {
@@ -141,8 +154,10 @@ const styles = StyleSheet.create({
   },
   comuicadosCardTitulo: {
     fontSize: 18,
-    paddingVertical: 4,
+    fontWeight: 'bold',
+    paddingVertical: 8,
     borderBottomWidth: 1,
+    borderColor: '#2FDBBC',
   },
   comunicadoCardListText: {
     fontSize: 18,
@@ -151,7 +166,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#999',
+    borderBottomColor: '#2FDBBC',
     backgroundColor: '#fff',
   },
   comunicadosContent: {
