@@ -3,7 +3,6 @@ import React from 'react';
 import { Button } from '@/components/Button';
 import { Stack, router } from 'expo-router';
 import { AuthUse } from '@/context/ctx';
-import { TokenType } from '@/database/interfaces/AuthTyped';
 
 export default function index() {
   const { userData, globalLoading, token } = AuthUse();

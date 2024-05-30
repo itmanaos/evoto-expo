@@ -1,14 +1,19 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { router } from 'expo-router';
-import { auth, getAuth } from 'firebaseConfig';
+import { auth } from 'firebaseConfig';
 import { AuthType, TokenType, UserDataType } from '@/database/interfaces/AuthTyped';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 
 export const AuthContext = createContext<AuthType>({} as AuthType);
 
-export const SessionProvider = ({ children }) => {
+interface Props {
+  children?: ReactNode;
+  // any props that come into the component
+}
+
+export const SessionProvider = ({ children }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [globalLoading, setGlobalLoading] = useState(false);
   const [userData, setUserData] = useState<UserDataType | null>(null);
