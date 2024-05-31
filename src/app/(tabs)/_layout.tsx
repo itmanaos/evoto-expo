@@ -8,7 +8,7 @@ export default function Layout() {
         name="main"
         options={{
           headerShown: false,
-          title: 'Home',
+          title: 'Bem Vindo',
           tabBarIcon: ({ focused, color, size }) => {
             if (focused) {
               return <FontAwesome name="home" color={color} size={size * 1.3} />;

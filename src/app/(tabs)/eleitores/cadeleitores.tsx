@@ -12,7 +12,6 @@ import { PressableProps } from 'react-native';
 import ButtonForm from '@/components/NativeBaseForm/ButtonForm';
 import InputForm from '@/components/NativeBaseForm/InputForm';
 import { IEleitoresPessoaisForm, formDadosSchema } from '@/database/interfaces/IEleitoresForm';
-import { ref } from 'yup';
 
 export default function Cadeleitores() {
   const {

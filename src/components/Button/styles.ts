@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#2FDBBC',
   },
   title: {
-    fontSize: 16,
+    fontSize: 22,
     color: '#FFF',
   },
 });

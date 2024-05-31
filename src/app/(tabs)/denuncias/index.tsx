@@ -5,16 +5,7 @@ import { categorias } from '@/database/modals/categorias';
 import { ICategory } from '@/database/interfaces/ITipoOcorrencias';
 import { SelectCategoria } from '@/components/SelectCategoria';
 import { router, useNavigation } from 'expo-router';
-
-export interface IMarker {
-  category: string;
-  contact: string;
-  description: string;
-  id: string;
-  latitude: number;
-  longitude: number;
-  name: string;
-}
+import { IMarker } from '@/database/interfaces/IMarker';
 
 export default function Denuncias() {
   const [markers, setMarkers] = useState<IMarker[]>([]);
