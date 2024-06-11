@@ -13,6 +13,7 @@ import { Tabs, router } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import { comunicados } from '@/database/modals/comunicados';
 import { IComunicados } from '@/database/interfaces/IComunicados';
+import TeamBoard from '@/components/TeamBoard';
 
 export default function Equipe() {
   const showTeam = () => {
@@ -47,6 +48,7 @@ export default function Equipe() {
       </TouchableOpacity>
     );
   }
+
   return (
     <SafeAreaView style={styles.headerContainer}>
       <Tabs.Screen
@@ -64,17 +66,7 @@ export default function Equipe() {
         }}
       />
       <View style={styles.container}>
-        <Text style={styles.welcomeText}>Olá Wilkens,</Text>
-        <View style={styles.equipeCard}>
-          <Text style={styles.equipeCardTitulo}>Você faz parte da Equipe:</Text>
-          <Text style={styles.equipeCardText}>NUMERO - NOME DA EQUIPE:</Text>
-        </View>
-        <View style={styles.coordenadorCard}>
-          <Text style={styles.coordenadorCardTitulo}>Coordenador da sua Equipe: </Text>
-          <Text style={styles.coordenadorCardText}>Nome: </Text>
-          <Text style={styles.coordenadorCardText}>Email: </Text>
-          <Text style={styles.coordenadorCardText}>Telefone: </Text>
-        </View>
+        <TeamBoard />
       </View>
       <FlatList
         ListHeaderComponent={
@@ -102,48 +94,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   container: {
-    margin: 8,
-  },
-  welcomeText: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  equipeCard: {
-    elevation: 1,
-    padding: 10,
-    borderRadius: 10,
     backgroundColor: '#fff',
-    borderColor: '#2FDBBC',
-    borderWidth: 2,
-    shadowColor: '#000',
-  },
-  equipeCardTitulo: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    paddingVertical: 4,
-  },
-  equipeCardText: {
-    fontSize: 20,
-    paddingVertical: 4,
-    textAlign: 'center',
-  },
-  coordenadorCard: {
-    elevation: 1,
-    marginVertical: 8,
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: '#fff',
-    borderColor: '#2FDBBC',
-    borderWidth: 2,
-    shadowColor: '#000',
-  },
-  coordenadorCardTitulo: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    paddingVertical: 4,
-  },
-  coordenadorCardText: {
-    fontSize: 20,
+    paddingHorizontal: 8,
   },
   comunicadosCard: {
     elevation: 1,

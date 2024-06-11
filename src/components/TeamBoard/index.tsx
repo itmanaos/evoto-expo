@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 18,
+    fontSize: 14,
     color: '#000',
   },
   titulo: {
-    fontSize: 16,
+    fontSize: 12,
     color: '#000',
     fontWeight: 'bold',
   },
@@ -48,19 +48,19 @@ const styles = StyleSheet.create({
 
   equipeCard: {},
   equipeCardTitulo: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
   },
   equipeCardText: {
-    fontSize: 18,
+    fontSize: 14,
     textAlign: 'center',
   },
   coordenadorCard: {},
   coordenadorCardTitulo: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
   },
   coordenadorCardText: {
-    fontSize: 18,
+    fontSize: 14,
   },
 });

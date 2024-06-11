@@ -11,9 +11,9 @@ export default function CardEleitoresCad({ title, cadastrados, onPress, color, .
   return (
     <Pressable {...rest} onPress={onPress}>
       <View style={{ alignItems: 'center' }}>
-        <Feather name="users" size={130} color={color} style={{ marginRight: 15 }} />
-        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{title}</Text>
-        <Text style={{ fontSize: 30 }}>{cadastrados}</Text>
+        <Feather name="users" size={80} color={color} style={{ marginRight: 15 }} />
+        <Text style={{ fontSize: 12, fontWeight: 'bold' }}>{title}</Text>
+        <Text style={{ fontSize: 22 }}>{cadastrados}</Text>
       </View>
     </Pressable>
   );

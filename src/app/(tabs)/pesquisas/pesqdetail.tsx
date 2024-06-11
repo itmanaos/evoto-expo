@@ -1,6 +1,7 @@
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import React from 'react';
 import { Stack, useLocalSearchParams, useNavigation } from 'expo-router';
+import { IPesquisas } from '@/database/interfaces/IPesquisas';
 
 export default function Pesqdetail() {
   const navigation = useNavigation();

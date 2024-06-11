@@ -39,12 +39,7 @@ export default function UrnasBoard() {
 }
 
 const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    width: 'auto',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  content: {},
   lineContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -52,8 +47,6 @@ const styles = StyleSheet.create({
   },
   localContent: {
     flex: 3,
-    textAlign: 'center',
-    alignItems: 'center',
   },
   sessaoContent: {
     flexDirection: 'row',
@@ -62,8 +55,6 @@ const styles = StyleSheet.create({
   },
   enderecoContent: {
     flex: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingVertical: 8,
   },
   horarioContent: {
@@ -80,11 +71,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 18,
+    fontSize: 14,
     color: '#000',
   },
   titulo: {
-    fontSize: 16,
+    fontSize: 12,
     color: '#000',
     fontWeight: 'bold',
   },
