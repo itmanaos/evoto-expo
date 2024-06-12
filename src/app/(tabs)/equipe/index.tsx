@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#fff',
-    paddingHorizontal: 8,
+    padding: 8,
   },
   comunicadosCard: {
     elevation: 1,

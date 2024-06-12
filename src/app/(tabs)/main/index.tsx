@@ -1,4 +1,4 @@
-import { View, StyleSheet, StatusBar, Dimensions } from 'react-native';
+import { View, StyleSheet, StatusBar, Dimensions, ScrollView } from 'react-native';
 import React from 'react';
 import { router } from 'expo-router';
 import { AuthUse } from '@/context/ctx';
@@ -6,19 +6,18 @@ import MapView, { Marker } from 'react-native-maps';
 import HeaderMain from '@/components/HeaderMain';
 import TeamBoard from '@/components/TeamBoard';
 import UrnasBoard from '@/components/UrnasBoard';
-import { NativeBaseProvider } from 'native-base';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 const FirstRoute = () => (
-  <View style={styles.page}>
+  <ScrollView style={styles.page}>
     <TeamBoard />
-  </View>
+  </ScrollView>
 );
 
 const SecondRoute = () => (
-  <View style={styles.page}>
+  <ScrollView style={styles.page}>
     <UrnasBoard />
-  </View>
+  </ScrollView>
 );
 
 const initialLayout = {
@@ -53,7 +52,7 @@ export default function Main() {
   );
 
   return (
-    <NativeBaseProvider>
+    <View style={styles.background}>
       <HeaderMain name="Wilkens Figueiredo" onPress={logOut} />
       <MapView
         style={styles.map}
@@ -71,74 +70,34 @@ export default function Main() {
           }}
         />
       </MapView>
-      <View style={styles.container}>
-        <TabView
-          navigationState={{ index, routes }}
-          renderTabBar={renderTabBar}
-          renderScene={renderScene}
-          onIndexChange={setIndex}
-          initialLayout={initialLayout}
-        />
-      </View>
-    </NativeBaseProvider>
+
+      <TabView
+        navigationState={{ index, routes }}
+        renderTabBar={renderTabBar}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={initialLayout}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#e1e1e1',
     marginTop: StatusBar.currentHeight || 0,
   },
   map: {
-    flex: 3,
-    width: '100%',
-    height: '100%',
-  },
-  content: {
-    flex: 2,
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-  },
-  heading: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 100,
-    fontSize: 12,
-    paddingVertical: 10,
-  },
-  btLineContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  textLink: {
-    fontSize: 12,
-    color: '#000',
-  },
-  button: {
     flex: 1,
-    padding: 14,
-    backgroundColor: '#f2f2f2',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    fontSize: 14,
-    color: '#FFF',
-  },
-  boardContent: {
     width: '100%',
-    paddingHorizontal: 14,
   },
   container: {
-    flex: 2,
+    width: '100%',
+    height: 'auto',
   },
   page: {
-    padding: 8,
+    padding: 10,
+    backgroundColor: '#fff',
   },
 });
